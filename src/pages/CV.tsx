@@ -1,18 +1,37 @@
 import { ArrowLeft, Download } from "lucide-react";
+import html2pdf from "html2pdf.js";
 
 const CV = () => {
-  const handlePrint = () => window.print();
+  const handleDownloadPDF = () => {
+    const element = document.getElementById("cv-content");
+    if (element) {
+      html2pdf()
+        .set({
+          margin: 0.5,
+          filename: "CV_Alicia_Lise_M.pdf",
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+        })
+        .from(element)
+        .save();
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Screen-only controls */}
+      {/* Barre fixe en haut */}
       <div className="print:hidden fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur border-b border-border">
         <div className="container mx-auto flex items-center justify-between h-14 px-4">
-          <a href="/#accueil" className="inline-flex items-center gap-2 text-xs font-mono text-primary hover:text-glow-cyan transition-all">
-            <ArrowLeft className="w-4 h-4" /> Retour au portfolio
-          </a>
+   <a
+  href="/#accueil"
+  className="inline-flex items-center gap-2 text-xs font-mono text-primary hover:text-glow-cyan transition-all"
+>
+  <ArrowLeft className="w-4 h-4" /> Retour au portfolio
+</a>
+
           <button
-            onClick={handlePrint}
+            onClick={handleDownloadPDF}
             className="inline-flex items-center gap-2 px-4 py-2 border border-primary text-primary text-xs font-mono hover:bg-primary/10 transition-all rounded-sm"
           >
             <Download className="w-4 h-4" /> Télécharger PDF
@@ -20,11 +39,19 @@ const CV = () => {
         </div>
       </div>
 
-      <div className="container mx-auto max-w-3xl px-6 pt-20 pb-12 print:pt-0 print:pb-0 print:max-w-none">
+      {/* Contenu CV */}
+      <div
+        id="cv-content"
+        className="container mx-auto max-w-3xl px-6 pt-20 pb-12 print:pt-0 print:pb-0 print:max-w-none"
+      >
         {/* Header */}
         <header className="mb-8 border-b border-border pb-6 print:border-muted">
-          <h1 className="font-display text-3xl font-bold mb-1">Alicia Lise Marion OUEDRAOGO</h1>
-          <p className="text-sm font-mono text-primary mb-3">Digital Strategist | Data Scientist | Leadership Architect</p>
+          <h1 className="font-display text-3xl font-bold mb-1">
+            Alicia Lise Marion OUEDRAOGO
+          </h1>
+          <p className="text-sm font-mono text-primary mb-3">
+            Digital Strategist | Data Scientist | Leadership Architect
+          </p>
           <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs font-mono text-muted-foreground">
             <span>ouedraogoalicia22@gmail.com</span>
             <span>+212 0607681322</span>
@@ -39,7 +66,9 @@ const CV = () => {
 
         {/* Profil */}
         <section className="mb-6">
-          <h2 className="font-display text-lg font-bold text-primary border-b border-primary/30 pb-1 mb-3">Profil</h2>
+          <h2 className="font-display text-lg font-bold text-primary border-b border-primary/30 pb-1 mb-3">
+            Profil
+          </h2>
           <p className="text-sm font-body text-muted-foreground leading-relaxed">
             Développeuse full stack spécialisée en Big Data et IA, stratège digitale et leader engagée dans l'innovation sociale et la transformation numérique africaine. Expérience en développement web, marketing digital, gestion de projets technologiques à impact et encadrement de communautés.
           </p>
@@ -47,7 +76,9 @@ const CV = () => {
 
         {/* Formation */}
         <section className="mb-6">
-          <h2 className="font-display text-lg font-bold text-primary border-b border-primary/30 pb-1 mb-3">Formation</h2>
+          <h2 className="font-display text-lg font-bold text-primary border-b border-primary/30 pb-1 mb-3">
+            Formation
+          </h2>
           <div className="space-y-3">
             {[
               { period: "2025 – 2026", school: "ITSUP Casablanca", degree: "Master 1 Big Data et IA" },
@@ -68,7 +99,9 @@ const CV = () => {
 
         {/* Expériences */}
         <section className="mb-6">
-          <h2 className="font-display text-lg font-bold text-primary border-b border-primary/30 pb-1 mb-3">Expériences Professionnelles</h2>
+          <h2 className="font-display text-lg font-bold text-primary border-b border-primary/30 pb-1 mb-3">
+            Expériences Professionnelles
+          </h2>
           <div className="space-y-4">
             {[
               {
@@ -108,7 +141,9 @@ const CV = () => {
 
         {/* Compétences */}
         <section className="mb-6">
-          <h2 className="font-display text-lg font-bold text-primary border-b border-primary/30 pb-1 mb-3">Compétences</h2>
+          <h2 className="font-display text-lg font-bold text-primary border-b border-primary/30 pb-1 mb-3">
+            Compétences
+          </h2>
           <div className="grid grid-cols-2 gap-x-8 gap-y-2 text-xs font-body text-muted-foreground">
             <div><span className="text-foreground font-semibold">Tech:</span> React, Flutter, Laravel/PHP, Fullstack</div>
             <div><span className="text-foreground font-semibold">Data:</span> Big Data, IA, Machine Learning, Data Science</div>
@@ -119,9 +154,11 @@ const CV = () => {
           </div>
         </section>
 
-        {/* Leadership */}
+        {/* Leadership & Engagement */}
         <section className="mb-6">
-          <h2 className="font-display text-lg font-bold text-primary border-b border-primary/30 pb-1 mb-3">Leadership & Engagement</h2>
+          <h2 className="font-display text-lg font-bold text-primary border-b border-primary/30 pb-1 mb-3">
+            Leadership & Engagement
+          </h2>
           <div className="space-y-2 text-xs text-muted-foreground">
             <div><span className="text-foreground font-semibold">Lise Group</span> – Fondatrice & Directrice | 50+ activités humanitaires</div>
             <div><span className="text-foreground font-semibold">Fellowship by Lise Group</span> – Formation leadership et mise en réseau</div>
@@ -132,7 +169,9 @@ const CV = () => {
 
         {/* Références */}
         <section>
-          <h2 className="font-display text-lg font-bold text-primary border-b border-primary/30 pb-1 mb-3">Références</h2>
+          <h2 className="font-display text-lg font-bold text-primary border-b border-primary/30 pb-1 mb-3">
+            Références
+          </h2>
           <div className="grid grid-cols-2 gap-4 text-xs text-muted-foreground">
             <div>
               <div className="text-foreground font-semibold">AIT SAID Mehdi</div>
@@ -144,8 +183,8 @@ const CV = () => {
               <div>Directeur – ESRIM, Settat</div>
               <div>+212 666 854 185</div>
             </div>
-             <div>
-              <div className="text-foreground font-semibold"> M.OUEDRAOGO</div>
+            <div>
+              <div className="text-foreground font-semibold">M. OUEDRAOGO</div>
               <div>Coordonateur des classes prepa MENAPLN-OUAGA, Ouagadougou</div>
               <div>+226 71 86 64 65</div>
             </div>
