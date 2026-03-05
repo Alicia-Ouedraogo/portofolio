@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 25% 6%;
+    --foreground: 180 100% 95%;
+    --card: 220 25% 9%;
+    --card-foreground: 180 100% 95%;
+    --popover: 220 25% 9%;
+    --popover-foreground: 180 100% 95%;
+    --primary: 174 100% 50%;
+    --primary-foreground: 220 25% 6%;
+    --secondary: 300 100% 50%;
+    --secondary-foreground: 220 25% 6%;
+    --muted: 220 20% 14%;
+    --muted-foreground: 220 15% 55%;
+    --accent: 174 100% 50%;
+    --accent-foreground: 220 25% 6%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 174 100% 50%;
+    --radius: 0.5rem;
+    --sidebar-background: 220 25% 8%;
+    --sidebar-foreground: 180 100% 95%;
+    --sidebar-primary: 174 100% 50%;
+    --sidebar-primary-foreground: 220 25% 6%;
+    --sidebar-accent: 220 20% 14%;
+    --sidebar-accent-foreground: 180 100% 95%;
+    --sidebar-border: 220 20% 18%;
+    --sidebar-ring: 174 100% 50%;
+
+    /* Custom tokens */
+    --cyber-cyan: 174 100% 50%;
+    --cyber-magenta: 300 100% 50%;
+    --cyber-dark: 220 25% 6%;
+    --cyber-darker: 220 30% 4%;
+    --cyber-card: 220 25% 9%;
+    --cyber-glow-cyan: 0 0 20px hsl(174 100% 50% / 0.4);
+    --cyber-glow-magenta: 0 0 20px hsl(300 100% 50% / 0.4);
+    --cyber-border: 220 20% 18%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-mono;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  h1, h2, h3 {
+    font-family: 'Orbitron', sans-serif;
+  }
+}
+
+/* Cyberpunk utilities */
+@layer utilities {
+  .font-display {
+    font-family: 'Orbitron', sans-serif;
+  }
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .font-body {
+    font-family: 'Inter', sans-serif;
+  }
+  .text-glow-cyan {
+    text-shadow: 0 0 10px hsl(174 100% 50% / 0.6), 0 0 30px hsl(174 100% 50% / 0.3);
+  }
+  .text-glow-magenta {
+    text-shadow: 0 0 10px hsl(300 100% 50% / 0.6), 0 0 30px hsl(300 100% 50% / 0.3);
+  }
+  .border-glow-cyan {
+    box-shadow: 0 0 10px hsl(174 100% 50% / 0.3), inset 0 0 10px hsl(174 100% 50% / 0.1);
+  }
+  .border-glow-magenta {
+    box-shadow: 0 0 10px hsl(300 100% 50% / 0.3), inset 0 0 10px hsl(300 100% 50% / 0.1);
+  }
+  .cyber-gradient {
+    background: linear-gradient(135deg, hsl(220 25% 6%) 0%, hsl(220 30% 10%) 50%, hsl(220 25% 6%) 100%);
+  }
+  .scanline {
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      hsl(174 100% 50% / 0.03) 2px,
+      hsl(174 100% 50% / 0.03) 4px
+    );
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(220 25% 6%);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(174 100% 50% / 0.3);
+  border-radius: 3px;
+}
+
+/* Animations */
+@keyframes pulse-cyan {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.3; }
+  94% { opacity: 1; }
+  96% { opacity: 0.8; }
+  97% { opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
