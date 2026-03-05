@@ -4,13 +4,13 @@ const projects = [
   {
     title: "Application Gestion Parc Automobiles",
     description: "Développée pour l'Agence Urbaine de Settat. Solution complète de gestion et suivi de maintenance des véhicules, incluant géolocalisation et alertes. Projet noté 18/20.",
-    tags: ["Flutter", "Laravel/PHP", "Géolocalisation"],
+    tags: ["REACT", "TYPE SCRIPT", "Géolocalisation"],
     link: "https://github.com/Alicia-Ouedraogo",
   },
     {
     title: "Application Gestion De Stock",
     description: "Développée pour le MINISTERE DE L'URBANISME( l'Agence Urbaine de Settat). Solution complète de gestion et suivi des fournitures.",
-    tags: ["Flutter", "Laravel/PHP", "Géolocalisation"],
+    tags: ["PHP", "Laravel", "SQL"],
     link: "https://github.com/Alicia-Ouedraogo",
   },
   {

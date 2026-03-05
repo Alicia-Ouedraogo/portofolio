@@ -47,9 +47,17 @@ digitale. Expérience en développement web, stratégie digitale et gestion de p
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <a href="#projets" className="inline-flex items-center gap-2 px-5 py-2.5 border border-primary text-primary font-mono text-sm hover:bg-primary/10 transition-all rounded-sm">
-              <Eye className="w-4 h-4" /> Voir mes projets
-            </a>
+            <a
+  href="#projets"
+  onClick={(e) => {
+    e.preventDefault(); // empêche le saut instantané
+    const section = document.getElementById("projets");
+    if (section) section.scrollIntoView({ behavior: "smooth" }); // scroll fluide
+  }}
+  className="inline-flex items-center gap-2 px-5 py-2.5 border border-primary text-primary font-mono text-sm hover:bg-primary/10 transition-all rounded-sm"
+>
+  <Eye className="w-4 h-4" /> Voir mes projets
+</a>
             <a href="/#/cv" className="inline-flex items-center gap-2 px-5 py-2.5 bg-muted text-foreground font-mono text-sm hover:bg-muted/80 transition-all rounded-sm">
               <Download className="w-4 h-4" /> Télécharger CV
             </a>
@@ -59,12 +67,27 @@ digitale. Expérience en développement web, stratégie digitale et gestion de p
             <a href="mailto:ouedraogoalicia22@gmail.com" className="flex items-center gap-1.5 border border-border px-3 py-1.5 rounded-sm hover:border-primary/50 transition-colors">
               <Mail className="w-3 h-3" /> ouedraogoalicia22@gmail.com
             </a>
-            <span className="flex items-center gap-1.5 border border-border px-3 py-1.5 rounded-sm">
-              <Phone className="w-3 h-3" /> +212 0607681322
-            </span>
-            <span className="flex items-center gap-1.5 border border-border px-3 py-1.5 rounded-sm">
-              <Phone className="w-3 h-3" /> +226 54793512
-            </span>
+           <span className="flex items-center gap-1.5 border border-border px-3 py-1.5 rounded-sm">
+  <a
+    href="https://wa.me/212607681322"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-1.5"
+  >
+    <Phone className="w-3 h-3" /> +212 0607681322
+  </a>
+</span>
+
+<span className="flex items-center gap-1.5 border border-border px-3 py-1.5 rounded-sm">
+  <a
+    href="https://wa.me/22654793512"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-1.5"
+  >
+    <Phone className="w-3 h-3" /> +226 54793512
+  </a>
+</span>
           </div>
 
           <div className="flex items-center gap-4 text-xs font-mono">
