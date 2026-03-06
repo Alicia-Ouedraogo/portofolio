@@ -1,38 +1,47 @@
-import { ArrowLeft, Download } from "lucide-react";
+import { ArrowLeft, Download } from "lucide-react"; 
 import html2pdf from "html2pdf.js";
 
 const CV = () => {
   const handleDownloadPDF = () => {
     const element = document.getElementById("cv-content");
-    if (element) {
-      html2pdf()
-        .set({
-          margin: 0.5,
-          filename: "CV_Alicia_Lise_M.pdf",
-          image: { type: "jpeg", quality: 0.98 },
-          html2canvas: { scale: 2 },
-          jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
-        })
-        .from(element)
-        .save();
-    }
+    if (!element) return;
+
+    // Clone le contenu pour appliquer le style PDF noir sur blanc
+    const clone = element.cloneNode(true) as HTMLElement;
+    clone.style.backgroundColor = "#ffffff";
+    clone.style.color = "#000000";
+
+    // Supprime certains éléments inutiles pour le PDF
+    const unwanted = clone.querySelectorAll(".print-hidden");
+    unwanted.forEach(el => el.remove());
+
+    html2pdf()
+      .set({
+        margin: 0.5,
+        filename: "CV_Alicia_Lise_M.pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+      })
+      .from(clone)
+      .save();
   };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Barre fixe en haut */}
-      <div className="print:hidden fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur border-b border-border">
+      <div className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur border-b border-border print:hidden">
         <div className="container mx-auto flex items-center justify-between h-14 px-4">
-   <a
-  href="/#accueil"
-  className="inline-flex items-center gap-2 text-xs font-mono text-primary hover:text-glow-cyan transition-all"
->
-  <ArrowLeft className="w-4 h-4" /> Retour au portfolio
-</a>
+          <a
+            href="/"
+            className="text-primary underline hover:text-primary/90 flex items-center gap-1"
+          >
+            <ArrowLeft className="w-4 h-4" /> Continuer l’exploration de mon univers
+          </a>
 
           <button
             onClick={handleDownloadPDF}
-            className="inline-flex items-center gap-2 px-4 py-2 border border-primary text-primary text-xs font-mono hover:bg-primary/10 transition-all rounded-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 border border-foreground text-foreground text-xs font-mono hover:bg-foreground/10 transition-all rounded-sm"
           >
             <Download className="w-4 h-4" /> Télécharger PDF
           </button>
@@ -45,11 +54,11 @@ const CV = () => {
         className="container mx-auto max-w-3xl px-6 pt-20 pb-12 print:pt-0 print:pb-0 print:max-w-none"
       >
         {/* Header */}
-        <header className="mb-8 border-b border-border pb-6 print:border-muted">
-          <h1 className="font-display text-3xl font-bold mb-1">
+        <header className="mb-8 border-b border-border pb-6">
+          <h1 className="font-display text-3xl font-bold mb-1 text-foreground">
             Alicia Lise Marion OUEDRAOGO
           </h1>
-          <p className="text-sm font-mono text-primary mb-3">
+          <p className="text-sm font-mono mb-3 text-foreground">
             Digital Strategist | Data Scientist | Leadership Architect
           </p>
           <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs font-mono text-muted-foreground">
@@ -58,7 +67,7 @@ const CV = () => {
             <span>+226 54793512</span>
             <span>Casablanca, Maroc / Ouagadougou, Burkina Faso</span>
           </div>
-          <div className="flex gap-4 mt-2 text-xs font-mono text-primary">
+          <div className="flex gap-4 mt-2 text-xs font-mono text-foreground">
             <span>linkedin.com/in/alicia-lise-marion-ouedraogo-00aa81326</span>
             <span>github.com/Alicia-Ouedraogo</span>
           </div>
@@ -66,7 +75,7 @@ const CV = () => {
 
         {/* Profil */}
         <section className="mb-6">
-          <h2 className="font-display text-lg font-bold text-primary border-b border-primary/30 pb-1 mb-3">
+          <h2 className="font-display text-lg font-bold text-foreground border-b border-foreground/30 pb-1 mb-3">
             Profil
           </h2>
           <p className="text-sm font-body text-muted-foreground leading-relaxed">
@@ -76,16 +85,16 @@ const CV = () => {
 
         {/* Formation */}
         <section className="mb-6">
-          <h2 className="font-display text-lg font-bold text-primary border-b border-primary/30 pb-1 mb-3">
+          <h2 className="font-display text-lg font-bold text-foreground border-b border-foreground/30 pb-1 mb-3">
             Formation
           </h2>
           <div className="space-y-3">
-            {[
+            {[ 
               { period: "2025 – 2026", school: "ITSUP Casablanca", degree: "Master 1 Big Data et IA" },
               { period: "2024 – 2025", school: "ESRIM – Settat", degree: "Licence Développement d'Applications Digitales et Informatiques – Mention Très Bien" },
               { period: "2020 – 2022", school: "Université Scientifique du Burkina (CPGE)", degree: "Classes Préparatoires MP" },
-              { period: "2021 – 2022", school: "Complexe Scolaire Mgr André Dupont", degree: "Baccalauréat Scientifique Série D – Mention Bien" },
-            ].map((e, i) => (
+              { period: "2021 – 2022", school: "Complexe Scolaire Mgr André Dupont", degree: "Baccalauréat Scientifique Série D – Mention Bien" }
+            ].map((e,i) => (
               <div key={i} className="flex gap-4">
                 <span className="text-xs font-mono text-secondary whitespace-nowrap w-24 flex-shrink-0">{e.period}</span>
                 <div>
@@ -99,39 +108,22 @@ const CV = () => {
 
         {/* Expériences */}
         <section className="mb-6">
-          <h2 className="font-display text-lg font-bold text-primary border-b border-primary/30 pb-1 mb-3">
+          <h2 className="font-display text-lg font-bold text-foreground border-b border-foreground/30 pb-1 mb-3">
             Expériences Professionnelles
           </h2>
           <div className="space-y-4">
-            {[
-              {
-                period: "Jan 2026 – Présent",
-                title: "Assistante IT et Communication",
-                company: "CGX Morocco – Casablanca",
-                tasks: ["Gestion des réseaux et support IT", "Création de contenu audiovisuel", "Stratégie digitale et développement web"],
-              },
-              {
-                period: "Avr – Juin 2025",
-                title: "Stagiaire Développeuse",
-                company: "Agence Urbaine de Settat – Ministère de l'Urbanisme",
-                tasks: ["Application de gestion du parc automobile (Flutter/Laravel)", "Projet noté 18/20"],
-              },
-              {
-                period: "Juillet 2025",
-                title: "Développeuse Front-End (Freelance)",
-                company: "REM Waste – Royaume-Uni",
-                tasks: ["Site de réservation via API – React responsive"],
-              },
-            ].map((e, i) => (
+            {[ 
+              { period: "Jan 2026 – Présent", title: "Assistante IT et Communication", company: "CGX Morocco – Casablanca", tasks: ["Gestion des réseaux et support IT", "Création de contenu audiovisuel", "Stratégie digitale et développement web"] },
+              { period: "Avr – Juin 2025", title: "Stagiaire Développeuse", company: "Agence Urbaine de Settat – Ministère de l'Urbanisme", tasks: ["Application de gestion du parc automobile (Flutter/Laravel)", "Projet noté 18/20"] },
+              { period: "Juillet 2025", title: "Développeuse Front-End (Freelance)", company: "REM Waste – Royaume-Uni", tasks: ["Site de réservation via API – React responsive"] },
+            ].map((e,i)=>(
               <div key={i} className="flex gap-4">
                 <span className="text-xs font-mono text-secondary whitespace-nowrap w-28 flex-shrink-0">{e.period}</span>
                 <div>
                   <div className="text-sm font-semibold text-foreground">{e.title}</div>
                   <div className="text-xs font-mono text-muted-foreground mb-1">{e.company}</div>
                   <ul className="space-y-0.5">
-                    {e.tasks.map((t, j) => (
-                      <li key={j} className="text-xs text-muted-foreground">▸ {t}</li>
-                    ))}
+                    {e.tasks.map((t,j)=><li key={j} className="text-xs text-muted-foreground">▸ {t}</li>)}
                   </ul>
                 </div>
               </div>
@@ -141,7 +133,7 @@ const CV = () => {
 
         {/* Compétences */}
         <section className="mb-6">
-          <h2 className="font-display text-lg font-bold text-primary border-b border-primary/30 pb-1 mb-3">
+          <h2 className="font-display text-lg font-bold text-foreground border-b border-foreground/30 pb-1 mb-3">
             Compétences
           </h2>
           <div className="grid grid-cols-2 gap-x-8 gap-y-2 text-xs font-body text-muted-foreground">
@@ -156,7 +148,7 @@ const CV = () => {
 
         {/* Leadership & Engagement */}
         <section className="mb-6">
-          <h2 className="font-display text-lg font-bold text-primary border-b border-primary/30 pb-1 mb-3">
+          <h2 className="font-display text-lg font-bold text-foreground border-b border-foreground/30 pb-1 mb-3">
             Leadership & Engagement
           </h2>
           <div className="space-y-2 text-xs text-muted-foreground">
@@ -169,7 +161,7 @@ const CV = () => {
 
         {/* Références */}
         <section>
-          <h2 className="font-display text-lg font-bold text-primary border-b border-primary/30 pb-1 mb-3">
+          <h2 className="font-display text-lg font-bold text-foreground border-b border-foreground/30 pb-1 mb-3">
             Références
           </h2>
           <div className="grid grid-cols-2 gap-4 text-xs text-muted-foreground">
